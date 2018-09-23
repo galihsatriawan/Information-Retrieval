@@ -176,6 +176,23 @@ void print_docs(){
         cout <<"D"<<(i++)<<":"<< it->data<<endl;;
     }
 }
+#define forVI(it,d) for(vector<int>::iterator it=d.begin();it!=d.end();it++)
+double scalar_doc(Dokumen d){
+    double temp=0;
+    //penjumlahan seluruh kuadrat
+    forVI(it,d.v){
+        temp+= (*it)*(*it);
+    }
+    //cout << temp<<endl;
+    return sqrt(temp);
+}
+double cross_vector(Dokumen a,Dokumen b){
+    double sum=0;
+    for(int i=0;i<kata_unik.size();i++){
+        sum += (a.v[i]*b.v[i]);
+    }
+    return sum;
+}
 int main(){
     /* Test  Split Sentence
     vector<string> test = split_sent("halo burung",' ');
@@ -193,14 +210,18 @@ int main(){
    }
    
    */
-  add_data("halo bang galih bang");
-  add_data("halo juga bang");
-  add_data("siap bang");
+  add_data("burung kakak tua");
+  add_data("nenek sudah tua");
+  add_data("burung sudah tua");
+
   print_docs();
   print_uniq();
   vectorize();
   print_all_vector();
+//   cout << "Scalar D1 : "<<scalar_doc(docs[0])<<endl;
     // print_vector(docs.at(0));
-   
+  double d1=scalar_doc(docs[0]),d3=scalar_doc(docs[2]);  
+  double similar13 = cross_vector(docs[0],docs[2])/(d1*d3);
+  cout <<"Similarity D1 & D3 : "<<  similar13 << endl;
  return 0;
 }
